@@ -14,6 +14,15 @@ declare(strict_types=1);
 			$this->RegisterPropertyInteger ("WindowState",0) ; // ist eine ID, daher ein Integer
 			$this->RegisterPropertyInteger ("SoC",0) ; // ist eine ID, daher ein Integer
 
+			$this->RegisterPropertyInteger ("ExtremHumidity_Present", 70) ;
+			$this->RegisterPropertyInteger ("MaxHumidity_Present", 64) ; 
+			$this->RegisterPropertyInteger ("MinHumidity_Present", 58) ; 
+
+			$this->RegisterPropertyInteger ("ExtremHumidity_Absend", 66) ;
+			$this->RegisterPropertyInteger ("MaxHumidity_Absend", 58) ; 
+			$this->RegisterPropertyInteger ("MinHumidity_Absend", 52) ; 
+
+
 			$this->RegisterPropertyInteger ("Switch",0) ; // ist eine ID, daher ein Integer
 			
 			
@@ -94,23 +103,21 @@ declare(strict_types=1);
 			$RoomPresence = GetValue($ID_RoomPresence);
 			$WindowState = GetValue($ID_WindowState);
 			$SoC = GetValue($ID_SoC);
-			
-			$Switch_State = GetValue($ID_Switch);
-			
+
 
 			if ($RoomPresence)
 			{   
-				$humidity_extrem = 70;
+				$humidity_extrem = $this->ReadPropertyInteger("ExtremHumidity_Present");
 				
-				$humidity_max = 64;
-				$humidity_min = 58;
+				$humidity_max = $this->ReadPropertyInteger("MaxHumidity_Present");
+				$humidity_min = $this->ReadPropertyInteger("MinHumidity_Present");
 			}
 			else // keiner im Raum
 			{   
-				$humidity_extrem = 66;
+				$humidity_extrem = $this->ReadPropertyInteger("ExtremHumidity_Absend");;
 			
-				$humidity_max = 58;
-				$humidity_min = 52;
+				$humidity_max = $this->ReadPropertyInteger("MaxHumidity_Absend");;
+				$humidity_min = $this->ReadPropertyInteger("MinHumidity_Absend");;
 			}
 			
 			$SoC_min_Level = 90;
