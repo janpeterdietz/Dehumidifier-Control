@@ -30,8 +30,50 @@
             "name": "Switch",
             "caption": "Variable Schalter",
             "validVariableTypes": [0]
+        },
+        {
+            "type": "NumberSpinner",
+            "name": "ExtremHumidity_Present",
+            "caption": "ExtremHumidity_Present",
+            "suffix": "%",
+            "validVariableTypes": [1]
+        },
+        {
+            "type": "NumberSpinner",
+            "name": "MaxHumidity_Present",
+            "caption": "MaxHumidity_Present",
+            "suffix": "%",
+            "validVariableTypes": [1]
+        },
+        {
+            "type": "NumberSpinner",
+            "name": "MinHumidity_Present",
+            "caption": "MinHumidity_Present",
+            "suffix": "%",
+            "validVariableTypes": [1]
         }
-
+        ,
+        {
+            "type": "NumberSpinner",
+            "name": "ExtremHumidity_Absend",
+            "caption": "ExtremHumidity_Present",
+            "suffix": "%",
+            "validVariableTypes": [1]
+        },
+        {
+            "type": "NumberSpinner",
+            "name": "MaxHumidity_Absend",
+            "caption": "MaxHumidity_Absend",
+            "suffix": "%",
+            "validVariableTypes": [1]
+        },
+        {
+            "type": "NumberSpinner",
+            "name": "MinHumidity_Absend",
+            "caption": "MinHumidity_Absend",
+            "suffix": "%",
+            "validVariableTypes": [1]
+        }
     ],
     "actions": [],
     "status": []
