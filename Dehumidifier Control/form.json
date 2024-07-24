@@ -26,6 +26,13 @@
             "validVariableTypes": [2]
         },
         {
+            "type": "NumberSpinner",
+            "name": "MinimumSoC",
+            "caption": "Minmale Batterieladestand (min SoC)",
+            "suffix": "%",
+            "validVariableTypes": [1]
+        },
+        {
             "type": "SelectVariable",
             "name": "Switch",
             "caption": "Variable Schalter",
@@ -56,7 +63,7 @@
         {
             "type": "NumberSpinner",
             "name": "ExtremHumidity_Absend",
-            "caption": "ExtremHumidity_Present",
+            "caption": "ExtremHumidity_Absend",
             "suffix": "%",
             "validVariableTypes": [1]
         },
