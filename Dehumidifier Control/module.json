@@ -1,0 +1,12 @@
+{
+    "id": "{51741E1B-7E90-5CD9-81BE-3E9E17C7F231}",
+    "name": "Dehumidifier Control",
+    "type": 3,
+    "vendor": "",
+    "aliases": [],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "DHC",
+    "url": ""
+}

@@ -1,0 +1,38 @@
+{
+    "elements": 
+    [
+        {
+            "type": "SelectVariable",
+            "name": "Humidity",
+            "caption": "Variable Luftfeuchte",
+            "validVariableTypes": [1]
+        },
+        {
+            "type": "SelectVariable",
+            "name": "RoomPrecence",
+            "caption": "Variable Raumanwesend",
+            "validVariableTypes": [0]
+        },
+        {
+            "type": "SelectVariable",
+            "name": "WindowState",
+            "caption": "Variable Fensterstatus",
+            "validVariableTypes": [3]
+        },
+        {
+            "type": "SelectVariable",
+            "name": "SoC",
+            "caption": "Batterie Ladestand",
+            "validVariableTypes": [2]
+        },
+        {
+            "type": "SelectVariable",
+            "name": "Switch",
+            "caption": "Variable Schalter",
+            "validVariableTypes": [0]
+        }
+
+    ],
+    "actions": [],
+    "status": []
+}
