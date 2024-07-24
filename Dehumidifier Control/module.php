@@ -64,7 +64,7 @@ declare(strict_types=1);
 			$this->RegisterMessage($ID_SoC, VM_UPDATE);
 
 			//Initial Control
-			$this->Control();
+			$this->Control(0,0);
 
 		}
 
@@ -78,7 +78,7 @@ declare(strict_types=1);
 
 		private function Control($SenderID, $Message ): bool
 		{	
-			echo 'Sender ' . $SenderID, 'Message ' . $Message;
+			//echo 'Sender ' . $SenderID, 'Message ' . $Message;
 			
 			
 			$ID_Humidity = $this->ReadPropertyInteger('Humidity'); // ist eine ID, daher ein Integer
@@ -154,7 +154,7 @@ declare(strict_types=1);
 		
 					if ($SenderID == $ID_RoomPresence)  //and ($_IPS['VALUE'] == false) )
 					{
-						if (!RoomPresence)
+						if (!$RoomPresence)
 						{
 							if (  (($Humidity <= $humidity_max) or ($Humidity >= $humidity_min)) and ($SoC >= $SoC_min_Level) )
 							{
@@ -180,7 +180,7 @@ declare(strict_types=1);
 				
 					if ($SenderID == $ID_RoomPresence)  //and ($_IPS['VALUE'] == true) )
 					{
-						if (RoomPresence)
+						if ($RoomPresence)
 						{
 							if (  (($Humidity <= $humidity_max) or ($Humidity >= $humidity_min))  )
 							{
@@ -229,7 +229,7 @@ declare(strict_types=1);
 				$Luft_trocknen = false;  
 			};
 			
-			echo $ID_Switch; echo "Value"; echo $Luft_trocknen;
+			//echo $ID_Switch; echo "Value"; echo $Luft_trocknen;
 			RequestAction($ID_Switch, $Luft_trocknen );
 
 			return true;
