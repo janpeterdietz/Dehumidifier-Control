@@ -72,12 +72,15 @@ declare(strict_types=1);
 		{
 			$this->SendDebug('Sender ' . $SenderID, 'Message ' . $Message, 0);
 			if ($Message === VM_UPDATE) {
-				$this->Control();
+				$this->Control($SenderID, $Message);
 			}
 		}
 
-		private function Control(): bool
+		private function Control($SenderID, $Message ): bool
 		{	
+			echo 'Sender ' . $SenderID, 'Message ' . $Message;
+			
+			
 			$ID_Humidity = $this->ReadPropertyInteger('Humidity'); // ist eine ID, daher ein Integer
 			$ID_RoomPresence = $this->ReadPropertyInteger('RoomPrecence'); // ist eine ID, daher ein Integer
 			$ID_WindowState = $this->ReadPropertyInteger('WindowState'); // ist eine ID, daher ein Integer
@@ -135,7 +138,7 @@ declare(strict_types=1);
 			{
 				case "Trockner_off":
 				{
-					//if ( ($_IPS['VARIABLE'] == $id_Luftfeuchtigkeit) or ($_IPS['VARIABLE'] == $id_solar_battery) )
+					if ( ($SenderID == $ID_Humidity) or ($SenderID  == $ID_SoC) )
 					{
 						if ( $Humidity > $humidity_extrem )
 						{
@@ -149,12 +152,15 @@ declare(strict_types=1);
 						}
 					}
 		
-					//if ( ($_IPS['VARIABLE'] == $id_raum_anwesend) and ($_IPS['VALUE'] == false) )
+					if ($SenderID == $ID_RoomPresence)  //and ($_IPS['VALUE'] == false) )
 					{
-						if (  (($Humidity <= $humidity_max) or ($Humidity >= $humidity_min)) and ($SoC >= $SoC_min_Level) )
+						if (!RoomPresence)
 						{
-							$Luft_trocknen = true;
-							$trockner_control_state = "Trockner_on_normal";
+							if (  (($Humidity <= $humidity_max) or ($Humidity >= $humidity_min)) and ($SoC >= $SoC_min_Level) )
+							{
+								$Luft_trocknen = true;
+								$trockner_control_state = "Trockner_on_normal";
+							}
 						}
 					}
 				}
@@ -163,7 +169,7 @@ declare(strict_types=1);
 		
 				case "Trockner_on_normal":
 				{
-					//if ( ($_IPS['VARIABLE'] == $id_Luftfeuchtigkeit) or ($_IPS['VARIABLE'] == $id_solar_battery) )
+					if ( ($SenderID == $ID_Humidity) or ($SenderID  == $ID_SoC) )
 					{
 						if ( ($Humidity < $humidity_min) or  ($SoC < ($SoC_min_Level - 5)) )
 						{
@@ -172,21 +178,24 @@ declare(strict_types=1);
 						}
 					}
 				
-					//if ( ($_IPS['VARIABLE'] == $id_raum_anwesend) and ($_IPS['VALUE'] == true) )
+					if ($SenderID == $ID_RoomPresence)  //and ($_IPS['VALUE'] == true) )
 					{
-						if (  (($Humidity <= $humidity_max) or ($Humidity >= $humidity_min))  )
+						if (RoomPresence)
 						{
-							$Luft_trocknen = false;
-							$trockner_control_state = "Trockner_off";
+							if (  (($Humidity <= $humidity_max) or ($Humidity >= $humidity_min))  )
+							{
+								$Luft_trocknen = false;
+								$trockner_control_state = "Trockner_off";
+							}
 						}
 					}
-				
 				}
 				break;
 		
 				case "Trockner_on_extrem":
 				{
 					//if ( ($_IPS['VARIABLE'] == $id_Luftfeuchtigkeit) or ($_IPS['VARIABLE'] == $id_solar_battery)  or  ($_IPS['VARIABLE'] == $id_raum_anwesend)  )
+					//if ( ($SenderID == $ID_Humidity) or ($SenderID  == $ID_SoC) )
 					{
 						if ( $Humidity < $humidity_max)
 						{
