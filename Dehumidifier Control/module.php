@@ -29,6 +29,7 @@ declare(strict_types=1);
 			// State of Statemachine
 			$this->RegisterAttributeString("Controlstate", "Start nach Create") ;
 
+
 			$this->RegisterVariableInteger("RefSoCValue", "Referenz SoC", "~Battery.100", 10) ;	
 			$this->SetValue("RefSoCValue", 80);
 		}
@@ -48,7 +49,7 @@ declare(strict_types=1);
 			
 
 			if (!IPS_VariableExists($ID_Humidity) || !IPS_VariableExists($ID_RoomPresence) 
-				|| !IPS_VariableExists($ID_WindowState) || !IPS_VariableExists($ID_SoC)
+				|| !IPS_VariableExists($ID_SoC)
 				|| !IPS_VariableExists($ID_Switch) 
 				) 
 			{
@@ -72,7 +73,10 @@ declare(strict_types=1);
 			//Register necessary messages
 			$this->RegisterMessage($ID_Humidity, VM_UPDATE);
 			$this->RegisterMessage($ID_RoomPresence, VM_UPDATE);
-			$this->RegisterMessage($ID_WindowState, VM_UPDATE);
+			if (IPS_VariableExists($ID_WindowState))
+			{
+				$this->RegisterMessage($ID_WindowState, VM_UPDATE);
+			}
 			$this->RegisterMessage($ID_SoC, VM_UPDATE);
 
 			//Initial Control
@@ -104,7 +108,15 @@ declare(strict_types=1);
 
 			$Humidity = GetValue($ID_Humidity);
 			$RoomPresence = GetValue($ID_RoomPresence);
-			$WindowState = GetValue($ID_WindowState);
+			if (IPS_VariableExists($ID_WindowState))
+			{
+				$WindowState = GetValue($ID_WindowState);
+			}
+			else
+			{
+				$WindowState = "geschloßen";
+			}
+			
 			$SoC = GetValue($ID_SoC);
 
 
