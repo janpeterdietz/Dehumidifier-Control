@@ -14,8 +14,6 @@ declare(strict_types=1);
 			$this->RegisterPropertyInteger ("WindowState",0) ; // ist eine ID, daher ein Integer
 			$this->RegisterPropertyInteger ("SoC",0) ; // ist eine ID, daher ein Integer
 
-			$this->RegisterPropertyInteger ("MinimumSoC", 80) ; 
-
 			$this->RegisterPropertyInteger ("ExtremHumidity_Present", 70) ;
 			$this->RegisterPropertyInteger ("MaxHumidity_Present", 64) ; 
 			$this->RegisterPropertyInteger ("MinHumidity_Present", 58) ; 
@@ -28,9 +26,11 @@ declare(strict_types=1);
 
 			$this->RegisterPropertyInteger ("Switch",0) ; // ist eine ID, daher ein Integer
 			
-			
-			$this->RegisterVariableString("Controlstate", "Controlstate", "") ;
-			
+			// State of Statemachine
+			$this->RegisterAttributeString("Controlstate", "Start nach Create") ;
+
+			$this->RegisterVariableInteger("RefSoCValue", "Referenz SoC", "~Battery.100", 10) ;	
+			$this->SetValue("RefSoCValue", 80);
 		}
 
 
@@ -123,18 +123,9 @@ declare(strict_types=1);
 				$humidity_min = $this->ReadPropertyInteger("MinHumidity_Absend");
 			}
 			
-			$SoC_min_Level = $this->ReadPropertyInteger("MinimumSoC");;
-			/*if ($action == 1 ) // Morgens
-			{
-				$SoC_min_Level = 30;
-			}
-			else if ($action == 2 ) //Tagsüber
-			{
-				$SoC_min_Level = 80;
-			}*/
+			$SoC_min_Level = $this->GetValue("RefSoCValue");
 			
-			
-			$trockner_control_state = $this->GetValue('Controlstate');
+			$trockner_control_state = $this->ReadAttributeString('Controlstate');
 			//$Luft_trocknen = getvalue( IPS_GetObjectIDByIdent($ident_State, $id_dryer_switch)  );
 			
 			$Luft_trocknen = true;
@@ -232,7 +223,7 @@ declare(strict_types=1);
 		
 			} // end Switch
 			
-			$this->SetValue('Controlstate', $trockner_control_state );
+			$this->WriteAttributeString('Controlstate', $trockner_control_state );
 			 
 			if ( $WindowState != "geschloßen")
 			{ 
