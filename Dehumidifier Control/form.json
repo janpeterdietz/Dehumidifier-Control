@@ -26,13 +26,6 @@
             "validVariableTypes": [2]
         },
         {
-            "type": "NumberSpinner",
-            "name": "MinimumSoC",
-            "caption": "Minmale Batterieladestand (min SoC)",
-            "suffix": "%",
-            "validVariableTypes": [1]
-        },
-        {
             "type": "SelectVariable",
             "name": "Switch",
             "caption": "Variable Schalter",
