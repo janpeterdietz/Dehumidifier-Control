@@ -103,11 +103,11 @@ declare(strict_types=1);
 			$ID_SoC = $this->ReadPropertyInteger('SoC'); // ist eine ID, daher ein Integer
 			
 			$ID_Switch = $this->ReadPropertyInteger('Switch'); // ist eine ID, daher ein Integer
-			
-			
 
 			$Humidity = GetValue($ID_Humidity);
 			$RoomPresence = GetValue($ID_RoomPresence);
+			$SoC = GetValue($ID_SoC);
+
 			if (IPS_VariableExists($ID_WindowState))
 			{
 				$WindowState = GetValue($ID_WindowState);
@@ -117,7 +117,7 @@ declare(strict_types=1);
 				$WindowState = "geschloßen";
 			}
 			
-			$SoC = GetValue($ID_SoC);
+			
 
 
 			if ($RoomPresence)
