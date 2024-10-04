@@ -247,7 +247,7 @@ declare(strict_types=1);
 			//SetValue($ID_Switch, $Luft_trocknen );
 			//SetValue($ID_Switch, false );
 
-			RequestAction($ID_Switch, false);
+			requestAction($ID_Switch, false);
 			
 
 			return true;
