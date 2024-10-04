@@ -66,7 +66,7 @@ declare(strict_types=1);
 			{
             	foreach ($messages as $message) 
 				{
-                $this->UnregisterMessage($senderID, $message);
+                	$this->UnregisterMessage($senderID, $message);
             	}
         	}
 
@@ -236,8 +236,7 @@ declare(strict_types=1);
 			} // end Switch
 			
 			$this->WriteAttributeString('Controlstate', $trockner_control_state );
-			
-			//$this->LogMessage(" Controlstate ". IPS_GetName( $ID_Switch) . " ".  $trockner_control_state, KL_NOTIFY);
+			$this->LogMessage(" Controlstate ". IPS_GetName( $ID_Switch) . " ".  $trockner_control_state, KL_NOTIFY);
 
 			if ( $WindowState != "geschloßen")
 			{ 
