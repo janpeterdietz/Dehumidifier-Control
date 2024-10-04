@@ -22,13 +22,10 @@ declare(strict_types=1);
 			$this->RegisterPropertyInteger ("MaxHumidity_Absend", 58) ; 
 			$this->RegisterPropertyInteger ("MinHumidity_Absend", 52) ; 
 
-
-
 			$this->RegisterPropertyInteger ("Switch",0) ; // ist eine ID, daher ein Integer
 			
 			// State of Statemachine
 			$this->RegisterAttributeString("Controlstate", "Start nach Create") ;
-
 
 			$this->RegisterVariableInteger("RefSoCValue", "Referenz SoC", "~Battery.100", 10) ;	
 			$this->SetValue("RefSoCValue", 80);
@@ -242,10 +239,6 @@ declare(strict_types=1);
 			{ 
 				$Luft_trocknen = false;  
 			};
-			
-			//echo $ID_Switch; echo "Value"; echo $Luft_trocknen;
-			//SetValue($ID_Switch, $Luft_trocknen );
-			//SetValue($ID_Switch, false );
 
 			requestAction($ID_Switch, false);
 			
