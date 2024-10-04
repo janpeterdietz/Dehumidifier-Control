@@ -236,7 +236,7 @@ declare(strict_types=1);
 			} // end Switch
 			
 			$this->WriteAttributeString('Controlstate', $trockner_control_state );
-			$this->LogMessage(" Controlstate ". $ID_Switch . " ".  IPS_GetName( $ID_Switch) . " ".  $trockner_control_state, KL_NOTIFY);
+			//$this->LogMessage(" Controlstate ". $ID_Switch . " ".  IPS_GetName( $ID_Switch) . " ".  $trockner_control_state, KL_NOTIFY);
 
 			if ( $WindowState != "geschloßen")
 			{ 
