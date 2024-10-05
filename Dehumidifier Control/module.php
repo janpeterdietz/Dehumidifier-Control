@@ -240,7 +240,7 @@ declare(strict_types=1);
 				$Luft_trocknen = false;  
 			};
 
-			requestAction($ID_Switch, false);
+			requestAction($ID_Switch, $Luft_trocknen);
 			
 
 			return true;
