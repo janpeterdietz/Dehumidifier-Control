@@ -207,7 +207,7 @@ declare(strict_types=1);
 					//if ( ($_IPS['VARIABLE'] == $id_Luftfeuchtigkeit) or ($_IPS['VARIABLE'] == $id_solar_battery)  or  ($_IPS['VARIABLE'] == $id_raum_anwesend)  )
 					//if ( ($SenderID == $ID_Humidity) or ($SenderID  == $ID_SoC) )
 					{
-						if ( $Humidity < ($humidity_extrem-10))
+						if ( ($Humidity < ($humidity_extrem-10)) or ($Humidity < ($humidity_max)) )
 						{
 							if ( ($Humidity > $humidity_min)  and ($SoC >= $SoC_min_Level) )
 							{
