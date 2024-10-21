@@ -28,7 +28,7 @@ declare(strict_types=1);
 			$this->RegisterAttributeString("Controlstate", "Start nach Create") ;
 
 			$this->RegisterVariableInteger("RefSoCValue", "Referenz SoC", "~Battery.100", 10) ;	
-			$this->SetValue("RefSoCValue", 80);
+			$this->SetValue("RefSoCValue", 100);
 		}
 
 
