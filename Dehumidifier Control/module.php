@@ -142,6 +142,7 @@ declare(strict_types=1);
 			
 			switch ($trockner_control_state)
 			{
+				$this->SendDebug('old State '. $trockner_control_state, 'Feuchte'. Humidity, 0 );
 				case "Trockner_off":
 				{
 					if ( ($SenderID == $ID_Humidity) or ($SenderID  == $ID_Relases_State) )
@@ -175,7 +176,7 @@ declare(strict_types=1);
 		
 				case "Trockner_on_normal":
 				{
-					if ( ($SenderID == $ID_Humidity) or ($SenderID  == $ID_SoC) )
+					if ( ($SenderID == $ID_Humidity) or ($SenderID  == $ID_Relases_State) )
 					{
 						if ( ($Humidity < $humidity_min) or  (!$Relases_State) )
 						{
@@ -226,6 +227,7 @@ declare(strict_types=1);
 					$trockner_control_state = "Trockner_off";
 				}
 		
+				$this->SendDebug('new State '. $trockner_control_state, 'Feuchte'. Humidity, 0 );
 			} // end Switch
 			
 			$this->WriteAttributeString('Controlstate', $trockner_control_state );
