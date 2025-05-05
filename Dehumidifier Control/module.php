@@ -139,10 +139,10 @@ declare(strict_types=1);
 				$Luft_trocknen = false;
 			}
 			
+			$this->SendDebug('old State '. $trockner_control_state, 'Feuchte'. Humidity, 0 );
 			
 			switch ($trockner_control_state)
 			{
-				$this->SendDebug('old State '. $trockner_control_state, 'Feuchte'. Humidity, 0 );
 				case "Trockner_off":
 				{
 					if ( ($SenderID == $ID_Humidity) or ($SenderID  == $ID_Relases_State) )
