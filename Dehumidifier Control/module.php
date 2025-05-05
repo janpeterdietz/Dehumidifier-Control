@@ -12,7 +12,7 @@ declare(strict_types=1);
 			$this->RegisterPropertyInteger ("Humidity", 0) ; // ist eine ID, daher ein Integer
 			$this->RegisterPropertyInteger ("RoomPrecence",0) ; // ist eine ID, daher ein Integer
 			$this->RegisterPropertyInteger ("WindowState",0) ; // ist eine ID, daher ein Integer
-			$this->RegisterPropertyInteger ("SoC",0) ; // ist eine ID, daher ein Integer
+			$this->RegisterPropertyInteger ("Release_State",0) ; // ist eine ID, daher ein Integer
 
 			$this->RegisterPropertyInteger ("ExtremHumidity_Present", 70) ;
 			$this->RegisterPropertyInteger ("MaxHumidity_Present", 64) ; 
@@ -26,9 +26,6 @@ declare(strict_types=1);
 			
 			// State of Statemachine
 			$this->RegisterAttributeString("Controlstate", "Start nach Create") ;
-
-			$this->RegisterVariableInteger("RefSoCValue", "Referenz SoC", "~Battery.100", 10) ;	
-			$this->SetValue("RefSoCValue", 100);
 		}
 
 
@@ -40,13 +37,13 @@ declare(strict_types=1);
 			$ID_Humidity = $this->ReadPropertyInteger('Humidity'); // ist eine ID, daher ein Integer
 			$ID_RoomPresence = $this->ReadPropertyInteger('RoomPrecence'); // ist eine ID, daher ein Integer
 			$ID_WindowState = $this->ReadPropertyInteger('WindowState'); // ist eine ID, daher ein Integer
-			$ID_SoC = $this->ReadPropertyInteger('SoC'); // ist eine ID, daher ein Integer
+			$ID_Relases_State = $this->ReadPropertyInteger('Release_State'); // ist eine ID, daher ein Integer
 
 			$ID_Switch = $this->ReadPropertyInteger('Switch'); // ist eine ID, daher ein Integer
 			
 
 			if (!IPS_VariableExists($ID_Humidity) || !IPS_VariableExists($ID_RoomPresence) 
-				|| !IPS_VariableExists($ID_SoC)
+				|| !IPS_VariableExists($ID_Relases_State)
 				|| !IPS_VariableExists($ID_Switch) 
 				) 
 			{
@@ -74,7 +71,7 @@ declare(strict_types=1);
 			{
 				$this->RegisterMessage($ID_WindowState, VM_UPDATE);
 			}
-			$this->RegisterMessage($ID_SoC, VM_UPDATE);
+			$this->RegisterMessage($ID_Relases_State, VM_UPDATE);
 
 			//Initial Control
 			$this->Control(0,0);
@@ -97,13 +94,13 @@ declare(strict_types=1);
 			$ID_Humidity = $this->ReadPropertyInteger('Humidity'); // ist eine ID, daher ein Integer
 			$ID_RoomPresence = $this->ReadPropertyInteger('RoomPrecence'); // ist eine ID, daher ein Integer
 			$ID_WindowState = $this->ReadPropertyInteger('WindowState'); // ist eine ID, daher ein Integer
-			$ID_SoC = $this->ReadPropertyInteger('SoC'); // ist eine ID, daher ein Integer
+			$ID_Relases_State = $this->ReadPropertyInteger('ID_Relases_State'); // ist eine ID, daher ein Integer
 			
 			$ID_Switch = $this->ReadPropertyInteger('Switch'); // ist eine ID, daher ein Integer
 
 			$Humidity = GetValue($ID_Humidity);
 			$RoomPresence = GetValue($ID_RoomPresence);
-			$SoC = GetValue($ID_SoC);
+			$Relases_State = GetValue($ID_Relases_State);
 
 			if (IPS_VariableExists($ID_WindowState))
 			{
@@ -132,7 +129,6 @@ declare(strict_types=1);
 				$humidity_min = $this->ReadPropertyInteger("MinHumidity_Absend");
 			}
 			
-			$SoC_min_Level = $this->GetValue("RefSoCValue");
 			
 			$trockner_control_state = $this->ReadAttributeString('Controlstate');
 			//$Luft_trocknen = getvalue( IPS_GetObjectIDByIdent($ident_State, $id_dryer_switch)  );
@@ -155,7 +151,7 @@ declare(strict_types=1);
 							$Luft_trocknen = true;
 							$trockner_control_state = "Trockner_on_extrem";
 						}
-						else if ( ( $Humidity > $humidity_max ) and ($SoC >= $SoC_min_Level) )
+						else if ( ( $Humidity > $humidity_max ) and ($Relases_State) )
 						{
 							$Luft_trocknen = true;
 							$trockner_control_state = "Trockner_on_normal";
@@ -166,7 +162,7 @@ declare(strict_types=1);
 					{
 						if (!$RoomPresence)
 						{
-							if (  (($Humidity <= $humidity_max) or ($Humidity >= $humidity_min)) and ($SoC >= $SoC_min_Level) )
+							if (  (($Humidity <= $humidity_max) or ($Humidity >= $humidity_min)) and ($Relases_State) )
 							{
 								$Luft_trocknen = true;
 								$trockner_control_state = "Trockner_on_normal";
@@ -181,7 +177,7 @@ declare(strict_types=1);
 				{
 					if ( ($SenderID == $ID_Humidity) or ($SenderID  == $ID_SoC) )
 					{
-						if ( ($Humidity < $humidity_min) or  ($SoC < ($SoC_min_Level - 5)) )
+						if ( ($Humidity < $humidity_min) or  (!$Relases_State) )
 						{
 							$Luft_trocknen = false;
 							$trockner_control_state = "Trockner_off";
@@ -209,7 +205,7 @@ declare(strict_types=1);
 					{
 						if ( ($Humidity < ($humidity_extrem-10)) or ($Humidity < ($humidity_max)) )
 						{
-							if ( ($Humidity > $humidity_min)  and ($SoC >= $SoC_min_Level) )
+							if ( ($Humidity > $humidity_min)  and (!$Relases_State) )
 							{
 								$Luft_trocknen = true;
 								$trockner_control_state = "Trockner_on_normal";

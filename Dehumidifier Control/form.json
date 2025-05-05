@@ -21,9 +21,9 @@
         },
         {
             "type": "SelectVariable",
-            "name": "SoC",
-            "caption": "Batterie Ladestand",
-            "validVariableTypes": [2]
+            "name": "Release_State",
+            "caption": "Freigabe Status",
+            "validVariableTypes": [0]
         },
         {
             "type": "SelectVariable",
