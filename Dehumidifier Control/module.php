@@ -227,9 +227,10 @@ declare(strict_types=1);
 					$trockner_control_state = "Trockner_off";
 				}
 		
-				$this->SendDebug('new State '. $trockner_control_state, 'Feuchte'. Humidity, 0 );
 			} // end  Switch
-			
+		
+			$this->SendDebug('new State '. $trockner_control_state, 'Feuchte'. $Humidity, 0 );
+		
 			$this->WriteAttributeString('Controlstate', $trockner_control_state );
 			//$this->LogMessage(" Controlstate ". $ID_Switch . " ".  IPS_GetName( $ID_Switch) . " ".  $trockner_control_state, KL_NOTIFY);
 
