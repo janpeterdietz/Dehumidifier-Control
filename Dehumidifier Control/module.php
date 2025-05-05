@@ -144,7 +144,7 @@ declare(strict_types=1);
 			{
 				case "Trockner_off":
 				{
-					if ( ($SenderID == $ID_Humidity) or ($SenderID  == $ID_SoC) )
+					if ( ($SenderID == $ID_Humidity) or ($SenderID  == $ID_Relases_State) )
 					{
 						if ( $Humidity > $humidity_extrem )
 						{
