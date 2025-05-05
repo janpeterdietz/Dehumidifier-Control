@@ -94,7 +94,7 @@ declare(strict_types=1);
 			$ID_Humidity = $this->ReadPropertyInteger('Humidity'); // ist eine ID, daher ein Integer
 			$ID_RoomPresence = $this->ReadPropertyInteger('RoomPrecence'); // ist eine ID, daher ein Integer
 			$ID_WindowState = $this->ReadPropertyInteger('WindowState'); // ist eine ID, daher ein Integer
-			$ID_Relases_State = $this->ReadPropertyInteger('ID_Relases_State'); // ist eine ID, daher ein Integer
+			$ID_Relases_State = $this->ReadPropertyInteger('Release_State'); // ist eine ID, daher ein Integer
 			
 			$ID_Switch = $this->ReadPropertyInteger('Switch'); // ist eine ID, daher ein Integer
 
