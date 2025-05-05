@@ -228,7 +228,7 @@ declare(strict_types=1);
 				}
 		
 				$this->SendDebug('new State '. $trockner_control_state, 'Feuchte'. Humidity, 0 );
-			} // end Switch
+			} // end  Switch
 			
 			$this->WriteAttributeString('Controlstate', $trockner_control_state );
 			//$this->LogMessage(" Controlstate ". $ID_Switch . " ".  IPS_GetName( $ID_Switch) . " ".  $trockner_control_state, KL_NOTIFY);
