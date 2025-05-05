@@ -139,7 +139,7 @@ declare(strict_types=1);
 				$Luft_trocknen = false;
 			}
 			
-			$this->SendDebug('old State '. $trockner_control_state, 'Feuchte'. Humidity, 0 );
+			$this->SendDebug('old State '. $trockner_control_state, 'Feuchte'. $Humidity, 0 );
 			
 			switch ($trockner_control_state)
 			{
