@@ -239,7 +239,11 @@ declare(strict_types=1);
 				$Luft_trocknen = false;  
 			};
 
-			requestAction($ID_Switch, $Luft_trocknen);
+			$feedback = requestAction($ID_Switch, $Luft_trocknen);
+			if (feedback == false)
+			{
+				$this->LogMessage(" Switch ERROR ". $ID_Switch . " ".  IPS_GetName( $ID_Switch) . " ".  $trockner_control_state, KL_WARNING);
+			}
 			
 
 			return true;
