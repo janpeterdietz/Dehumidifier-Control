@@ -152,7 +152,7 @@ declare(strict_types=1);
 							$Luft_trocknen = true;
 							$trockner_control_state = "Trockner_on_extrem";
 						}
-						else if ( ( $Humidity > $humidity_max ) and ($Relases_State) )
+						else if ( ( $Humidity > $humidity_max ) and $Relases_State )
 						{
 							$Luft_trocknen = true;
 							$trockner_control_state = "Trockner_on_normal";
@@ -163,7 +163,7 @@ declare(strict_types=1);
 					{
 						if (!$RoomPresence)
 						{
-							if (  (($Humidity <= $humidity_max) or ($Humidity >= $humidity_min)) and ($Relases_State) )
+							if (  ($Humidity >= $humidity_min) and $Relases_State )
 							{
 								$Luft_trocknen = true;
 								$trockner_control_state = "Trockner_on_normal";
