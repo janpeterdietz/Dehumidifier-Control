@@ -189,7 +189,7 @@ declare(strict_types=1);
 					{
 						if ($RoomPresence)
 						{
-							if (  (($Humidity <= $humidity_max) or ($Humidity >= $humidity_min))  )
+							if ($Humidity <= $humidity_max) 
 							{
 								$Luft_trocknen = false;
 								$trockner_control_state = "Trockner_off";
