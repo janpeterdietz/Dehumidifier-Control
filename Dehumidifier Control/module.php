@@ -154,7 +154,7 @@ declare(strict_types=1);
 				}
 			}
 			
-			$this->LogMessage($_IPS['SELF']. " ". " Min Humdity ". $humidity_min .  " Max Humdity". $humidity_max, KL_NOTIFY);
+			$this->LogMessage($this->InstanceID. " ". " Min Humdity ". $humidity_min .  " Max Humdity". $humidity_max, KL_NOTIFY);
 
 			
 			$trockner_control_state = $this->ReadAttributeString('Controlstate');
