@@ -79,7 +79,7 @@
             "name": "Reference_Humidity",
             "caption": "Referenz Luftfeuchte",
             "validVariableTypes": [1]
-        },
+        }
     ],
     "actions": [],
     "status": []
