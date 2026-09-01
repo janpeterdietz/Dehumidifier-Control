@@ -104,7 +104,18 @@ declare(strict_types=1);
 			$Humidity = GetValue($ID_Humidity);
 			$RoomPresence = GetValue($ID_RoomPresence);
 			$Relases_State = GetValue($ID_Relases_State);
-			$Reference_Humidity = GetValue($ID_Reference_Humidity);
+
+
+			$vaild_reference = false;
+			if (IPS_VariableExists($ID_Reference_Humidity))
+			{
+				$Reference_Humidity = GetValue($ID_Reference_Humidity);
+				$vaild_reference = true;
+			}
+			else
+			{
+				$vaild_reference = false;
+			}
 			
 
 			if (IPS_VariableExists($ID_WindowState))
@@ -133,10 +144,13 @@ declare(strict_types=1);
 				$humidity_max = $this->ReadPropertyInteger("MaxHumidity_Absend");
 				$humidity_min = $this->ReadPropertyInteger("MinHumidity_Absend");
 
-				if ($Reference_Humidity > $humidity_min)
+				if ($vaild_reference)
 				{
-					$humidity_min = $Reference_Humidity; 
-					$humidity_max = $this->ReadPropertyInteger("MaxHumidity_Absend") -$this->ReadPropertyInteger("MinHumidity_Absend") + $humidity_min;	
+					if ($Reference_Humidity > $humidity_min)
+					{
+						$humidity_min = $Reference_Humidity; 
+						$humidity_max = $this->ReadPropertyInteger("MaxHumidity_Absend") -$this->ReadPropertyInteger("MinHumidity_Absend") + $humidity_min;	
+					}
 				}
 			}
 			
