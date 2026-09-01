@@ -136,6 +136,7 @@ declare(strict_types=1);
 				
 				$humidity_max = $this->ReadPropertyInteger("MaxHumidity_Present");
 				$humidity_min = $this->ReadPropertyInteger("MinHumidity_Present");
+				
 			}
 			else // keiner im Raum
 			{   
@@ -144,13 +145,14 @@ declare(strict_types=1);
 				$humidity_max = $this->ReadPropertyInteger("MaxHumidity_Absend");
 				$humidity_min = $this->ReadPropertyInteger("MinHumidity_Absend");
 
-				if ($vaild_reference)
+			}
+
+			if ($vaild_reference)
+			{
+				if ($Reference_Humidity > $humidity_min)
 				{
-					if ($Reference_Humidity > $humidity_min)
-					{
-						$humidity_min = $Reference_Humidity; 
-						$humidity_max = $this->ReadPropertyInteger("MaxHumidity_Absend") -$this->ReadPropertyInteger("MinHumidity_Absend") + $humidity_min;	
-					}
+					$humidity_min = $Reference_Humidity; 
+					$humidity_max = $this->ReadPropertyInteger("MaxHumidity_Absend") -$this->ReadPropertyInteger("MinHumidity_Absend") + $humidity_min;	
 				}
 			}
 			
