@@ -133,9 +133,9 @@ declare(strict_types=1);
 				$humidity_max = $this->ReadPropertyInteger("MaxHumidity_Absend");
 				$humidity_min = $this->ReadPropertyInteger("MinHumidity_Absend");
 
-				if (Reference_Humidity > humidity_min)
+				if ($Reference_Humidity > $humidity_min)
 				{
-					$humidity_min = Reference_Humidity; 
+					$humidity_min = $Reference_Humidity; 
 					$humidity_max = $this->ReadPropertyInteger("MaxHumidity_Absend") -$this->ReadPropertyInteger("MinHumidity_Absend") + $humidity_min;	
 				}
 			}
