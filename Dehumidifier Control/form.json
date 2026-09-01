@@ -73,7 +73,13 @@
             "caption": "MinHumidity_Absend",
             "suffix": "%",
             "validVariableTypes": [1]
-        }
+        },
+        {
+            "type": "SelectVariable",
+            "name": "Reference_Humidity",
+            "caption": "Referenz Luftfeuchte",
+            "validVariableTypes": [1]
+        },
     ],
     "actions": [],
     "status": []

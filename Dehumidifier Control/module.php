@@ -13,6 +13,7 @@ declare(strict_types=1);
 			$this->RegisterPropertyInteger ("RoomPrecence",0) ; // ist eine ID, daher ein Integer
 			$this->RegisterPropertyInteger ("WindowState",0) ; // ist eine ID, daher ein Integer
 			$this->RegisterPropertyInteger ("Release_State",0) ; // ist eine ID, daher ein Integer
+			$this->RegisterPropertyInteger ("Reference_Humidity",0) ; // ist eine ID, daher ein Integer
 
 			$this->RegisterPropertyInteger ("ExtremHumidity_Present", 70) ;
 			$this->RegisterPropertyInteger ("MaxHumidity_Present", 64) ; 
@@ -95,12 +96,16 @@ declare(strict_types=1);
 			$ID_RoomPresence = $this->ReadPropertyInteger('RoomPrecence'); // ist eine ID, daher ein Integer
 			$ID_WindowState = $this->ReadPropertyInteger('WindowState'); // ist eine ID, daher ein Integer
 			$ID_Relases_State = $this->ReadPropertyInteger('Release_State'); // ist eine ID, daher ein Integer
+			$ID_Reference_Humidity = $this->ReadPropertyInteger('Reference_Humidity'); // ist eine ID, daher ein Integer
+			
 			
 			$ID_Switch = $this->ReadPropertyInteger('Switch'); // ist eine ID, daher ein Integer
 
 			$Humidity = GetValue($ID_Humidity);
 			$RoomPresence = GetValue($ID_RoomPresence);
 			$Relases_State = GetValue($ID_Relases_State);
+			$Reference_Humidity = GetValue($ID_Reference_Humidity);
+			
 
 			if (IPS_VariableExists($ID_WindowState))
 			{
@@ -127,8 +132,16 @@ declare(strict_types=1);
 			
 				$humidity_max = $this->ReadPropertyInteger("MaxHumidity_Absend");
 				$humidity_min = $this->ReadPropertyInteger("MinHumidity_Absend");
+
+				if (Reference_Humidity > humidity_min)
+				{
+					$humidity_min = Reference_Humidity; 
+					$humidity_max = $this->ReadPropertyInteger("MaxHumidity_Absend") -$this->ReadPropertyInteger("MinHumidity_Absend") + $humidity_min;	
+				}
 			}
 			
+			$this->LogMessage(" Min Humdity ". $humidity_min .  " Max Humdity". $humidity_max, KL_NOTIFY);
+
 			
 			$trockner_control_state = $this->ReadAttributeString('Controlstate');
 			//$Luft_trocknen = getvalue( IPS_GetObjectIDByIdent($ident_State, $id_dryer_switch)  );
