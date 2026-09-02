@@ -27,6 +27,19 @@ declare(strict_types=1);
 			
 			// State of Statemachine
 			$this->RegisterAttributeString("Controlstate", "Start nach Create") ;
+
+			// Leistung in Watt mit Darstellung von Werten über 1000 als Kilowatt
+			$this->RegisterVariableInteger	('minHumity', 'minHumity', 
+											[
+												'PRESENTATION' => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+												'ICON' => 'bolt',
+												'SUFFIX' => ' %',
+												'INTERVALS_ACTIVE' => false
+											]
+											);
+
+
+			
 		}
 
 
@@ -156,8 +169,8 @@ declare(strict_types=1);
 				}
 			}
 			
-			$this->LogMessage($this->InstanceID. " ". " Min Humdity ". $humidity_min .  " Max Humdity". $humidity_max, KL_NOTIFY);
-
+			//$this->LogMessage($this->InstanceID. " ". " Min Humdity ". $humidity_min .  " Max Humdity". $humidity_max, KL_NOTIFY);
+			$this->WriteVariableInteger	('minHumity',	humidity_min);				
 			
 			$trockner_control_state = $this->ReadAttributeString('Controlstate');
 			//$Luft_trocknen = getvalue( IPS_GetObjectIDByIdent($ident_State, $id_dryer_switch)  );
