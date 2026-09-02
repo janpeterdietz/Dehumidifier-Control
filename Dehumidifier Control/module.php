@@ -170,7 +170,7 @@ declare(strict_types=1);
 			}
 			
 			//$this->LogMessage($this->InstanceID. " ". " Min Humdity ". $humidity_min .  " Max Humdity". $humidity_max, KL_NOTIFY);
-			$this->WriteVariableInteger	('minHumity',	humidity_min);				
+			$this->RequestAction	('minHumity',	humidity_min);				
 			
 			$trockner_control_state = $this->ReadAttributeString('Controlstate');
 			//$Luft_trocknen = getvalue( IPS_GetObjectIDByIdent($ident_State, $id_dryer_switch)  );
